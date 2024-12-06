@@ -90,12 +90,15 @@ def registration(request):
 # a list of dealerships
 # def get_dealerships(request):
 def get_dealerships(request, state="All"):
-    if(state == "All"):
-        endpoint = "/fetchDealers"
-    else:
-        endpoint = "/fetchDealers/"+state
-    dealerships = get_request(endpoint)
-    return JsonResponse({"status":200,"dealers":dealerships})
+    logger.info(f"Fetching dealerships for state: {state}")
+    try:
+        endpoint = f"/fetchDealers/{state}" if state != "All" else "/fetchDealers"
+        dealerships = get_request(endpoint)
+        logger.info(f"Dealerships retrieved: {dealerships}")
+        return JsonResponse({"status": 200, "dealers": dealerships})
+    except Exception as e:
+        logger.error(f"Error fetching dealerships: {e}")
+        return JsonResponse({"status": 500, "message": "Internal Server Error"})
 
 # Create a `get_dealer_reviews` view to render the reviews of a dealer
 # def get_dealer_reviews(request,dealer_id):
