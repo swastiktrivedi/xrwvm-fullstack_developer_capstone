@@ -4,6 +4,7 @@ from django.conf import settings
 from . import views
 
 app_name = 'djangoapp'
+
 urlpatterns = [
     # Path for registration
     path(route='register/', view=views.registration, name='register'),
@@ -11,6 +12,7 @@ urlpatterns = [
     # Path for login
     path(route='login/', view=views.login_user, name='login'),
     path('login', views.login_user),
+
     # Path for logout
     path(route='logout/', view=views.logout_request, name='logout'),
     
@@ -27,5 +29,5 @@ urlpatterns = [
 
     # Path for adding a review
     path(route='add_review/', view=views.add_review, name='add_review'),
-    path('add_review', views.add_review,),
+    path('add_review', views.add_review),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

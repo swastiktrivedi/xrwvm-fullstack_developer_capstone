@@ -1,5 +1,6 @@
 from .models import CarMake, CarModel
 
+
 def initiate():
     # Define CarMake data
     car_make_data = [
